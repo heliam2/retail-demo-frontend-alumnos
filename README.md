@@ -3,7 +3,7 @@
 Una tienda online **simulada y completamente funcional** ("ChileRetail"), construida
 como campo de práctica para QA: probar, automatizar y romper una SPA de e-commerce
 real sin depender de una tienda de producción. Es la mitad frontend del proyecto — el
-backend vive en el repo hermano [`retail-demo-backend`](../retail-demo-backend) (API +
+backend vive en el repo hermano [`retail-demo-backend`](https://github.com/heliam2/retail-demo-backend-alumnos) (API +
 base de datos simulada); 
 
 
@@ -40,7 +40,7 @@ que probarías en una tienda real, pero en un entorno controlado y reseteable.
 ## Cómo levantarlo
 
 Necesita el backend corriendo en `http://localhost:4000` (ver
-[`retail-demo-backend/README.md`](../retail-demo-backend/README.md)).
+[`retail-demo-backend-alumnos`](https://github.com/heliam2/retail-demo-backend-alumnos#readme)).
 
 ```bash
 npm install
