@@ -1,0 +1,134 @@
+:root {
+  --primary: #0f172a;
+  --primary-dark: #0b1220;
+  --bg: #f8fafc;
+  --card-bg: #ffffff;
+  --border: #e2e8f0;
+  --danger: #dc2626;
+  --success: #16a34a;
+  --text: #0f172a;
+  --muted: #64748b;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* -------------------------------------------------------------------------
+   Estilos legacy: solo aplican dentro de .legacy (rutas distintas al Home
+   nuevo, que usa Tailwind / design system). Evita que estas reglas de
+   elemento (button, a, input...) se filtren al Home.
+   ------------------------------------------------------------------------- */
+.legacy a { color: var(--primary); text-decoration: none; }
+
+.legacy .container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 20px 40px;
+}
+
+.legacy .navbar {
+  background: var(--primary);
+  color: white;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.legacy .navbar .brand { font-weight: 700; font-size: 1.2rem; color: white; }
+
+.legacy .navbar nav { display: flex; align-items: center; gap: 18px; }
+
+.legacy .navbar a { color: white; opacity: 0.9; }
+.legacy .navbar a:hover { opacity: 1; }
+
+.legacy .cart-badge {
+  background: white;
+  color: var(--primary);
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-left: 4px;
+}
+
+.legacy .page-title { margin: 24px 0 16px; }
+
+.legacy .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.legacy .card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.legacy .card img { width: 100%; height: 140px; object-fit: cover; border-radius: 8px; background: #eee; }
+
+.legacy .price { font-weight: 700; font-size: 1.05rem; }
+
+.legacy .badge { display: inline-block; font-size: 0.75rem; padding: 2px 8px; border-radius: 999px; }
+.legacy .badge.out { background: #fdecea; color: var(--danger); }
+.legacy .badge.low { background: #fff4e5; color: #b8630a; }
+.legacy .badge.in { background: #e8f5e9; color: var(--success); }
+
+.legacy button,
+.legacy .btn {
+  cursor: pointer;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+}
+.legacy button:hover { background: var(--primary-dark); }
+.legacy button:disabled { background: #b7bdc6; cursor: not-allowed; }
+
+.legacy button.secondary { background: transparent; color: var(--primary); border: 1px solid var(--primary); }
+.legacy button.danger { background: var(--danger); }
+
+.legacy .form {
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--card-bg);
+  padding: 24px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.legacy input,
+.legacy select {
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.legacy .alert { padding: 10px 14px; border-radius: 8px; font-size: 0.9rem; }
+.legacy .alert.error { background: #fdecea; color: var(--danger); }
+.legacy .alert.success { background: #e8f5e9; color: var(--success); }
+
+.legacy table { width: 100%; border-collapse: collapse; }
+.legacy th,
+.legacy td { text-align: left; padding: 10px; border-bottom: 1px solid var(--border); }
+
+.legacy .summary-row { display: flex; justify-content: space-between; padding: 4px 0; }
+.legacy .summary-row.total { font-weight: 700; font-size: 1.1rem; border-top: 1px solid var(--border); padding-top: 10px; margin-top: 6px; }
+
+.legacy .empty-state { padding: 40px; text-align: center; color: var(--muted); }
