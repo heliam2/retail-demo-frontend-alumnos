@@ -3,3 +3,7 @@ dist/
 data.json
 .env
 *.log
+
+# Playwright
+playwright-report/
+test-results/
