@@ -125,6 +125,34 @@ nombre/dirección/región/comuna/pago + cupón vía `api.quote`), `OrderConfirma
 
 ---
 
+## Pruebas (`tests/`)
+
+Todo lo que es prueba vive bajo `tests/`, organizado por nivel — misma
+convención que el repositorio del backend:
+
+```
+tests/
+└── e2e/        pruebas end-to-end por la interfaz (Playwright)
+```
+
+Los niveles de abajo (unitaria, componente, integración) se verifican contra el
+backend y viven en `retail-demo-backend-alumnos/tests/`.
+
+```bash
+# terminal 1 · en el repositorio del backend
+npm run dev                        # la API en el 4000
+
+# terminal 2 · acá
+npx playwright install chromium    # solo la primera vez
+npm run test:e2e
+npm run test:e2e:ui                # modo interactivo
+```
+
+`tests/e2e/demo-clase11/` trae los ejemplos de la clase 11, y su estructura de
+carpetas **es** la arquitectura en capas: `datos/` es la capa 2, `paginas/` la
+3, `acciones/` la 4, los `.spec.js` la 5, y `playwright.config.js` la 1 y la 6.
+Detalle en `tests/README.md`.
+
 ## Decisiones de diseño orientadas a QA
 
 - **`data-testid` en casi todos los elementos interactivos** — el proyecto está
