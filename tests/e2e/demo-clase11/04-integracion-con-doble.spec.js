@@ -19,16 +19,16 @@
  * "¿que parte de esto podemos reemplazar por un doble?".
  */
 import { test, expect } from '@playwright/test';
-import { iniciarSesionComoCliente } from './acciones/acciones.js';
+import { PaginaLogin } from './paginas/PaginaLogin.js';
 import { PaginaProducto } from './paginas/PaginaProducto.js';
-import { resetearSistema, PRODUCTOS } from './datos/fixtures.js';
+import { resetearSistema, USUARIOS, PRODUCTOS } from './datos/fixtures.js';
 
 test.beforeEach(async ({ request }) => {
   await resetearSistema(request);
 });
 
 test('la pantalla pinta el despacho que responde el servicio, sea cual sea', async ({ page }) => {
-  await iniciarSesionComoCliente(page);
+  await new PaginaLogin(page).iniciarSesionComo(USUARIOS.cliente);
 
   /*
    * EL DOBLE.
@@ -62,10 +62,9 @@ test('la pantalla pinta el despacho que responde el servicio, sea cual sea', asy
   const detalle = new PaginaProducto(page);
   await detalle.abrir(PRODUCTOS.sandalias.id);
 
-  await page.getByTestId('shipping-comuna-input').fill('Providencia');
-  await page.getByTestId('shipping-quote-btn').click();
+  await detalle.cotizarEnvioA('Providencia');
 
-  const resultado = page.getByTestId('shipping-result');
+  const resultado = detalle.resultadoDeEnvio();
 
   // Lo que respondio el doble SI aparece en pantalla...
   await expect(resultado).toBeVisible();
