@@ -43,7 +43,10 @@ prueba falla con un mensaje explícito en vez de un error críptico.
 ## El contenido
 
 `e2e/demo-clase11/` son los ejemplos que se leen en clase, y su estructura **es**
-la arquitectura en capas: `datos/` es la capa 2, `paginas/` la 3, `acciones/` la
-4, los `.spec.js` la 5, y `playwright.config.js` la 1 y la 6.
+la arquitectura en capas: `datos/` es la capa 2, `paginas/` la 3, los `.spec.js`
+la 5, y `playwright.config.js` la 1 y la 6.
+
+La capa 4 (acciones de negocio) todavía no existe, y el README de esa carpeta
+explica por qué: aparece cuando un flujo cruza varias pantallas, no antes.
 
 Está explicado en `e2e/demo-clase11/README.md`.

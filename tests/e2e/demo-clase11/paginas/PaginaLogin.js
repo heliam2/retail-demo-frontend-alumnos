@@ -1,12 +1,15 @@
 /*
- * CAPA 3: acceso al sistema.
+ * CAPA 3: acceso al sistema · pantalla de inicio de sesion.
  *
- * Esta clase es el UNICO lugar del proyecto que conoce los data-testid de la
- * pantalla de login. Si manana el frontend renombra 'auth-submit', se cambia
- * aqui, en un archivo, y todas las pruebas que inician sesion quedan arregladas.
+ * Esta clase es el UNICO lugar del proyecto que conoce los data-testid de esta
+ * pantalla. Si manana el frontend renombra 'auth-submit', se cambia aqui, en un
+ * archivo, y todas las pruebas que inician sesion quedan arregladas.
  *
- * Regla de la capa 3: aqui NO hay aserciones. Solo se expone como llegar a los
- * elementos y como operarlos. Que se verifica es decision de la capa 5.
+ * Un page object representa UNA pantalla, y expone:
+ *   - como llegar a sus elementos  (los localizadores de arriba)
+ *   - que se puede HACER en ella   (los metodos de abajo)
+ *
+ * Lo que NO lleva: aserciones. Que se verifica lo decide la prueba (capa 5).
  */
 export class PaginaLogin {
   constructor(page) {
@@ -23,12 +26,25 @@ export class PaginaLogin {
     await this.formulario.waitFor();
   }
 
-  async completar(email, password) {
-    await this.email.fill(email);
-    await this.password.fill(password);
+  /**
+   * Inicia sesion y espera a que la aplicacion haya salido de /login.
+   *
+   * Esa espera es necesaria: el login es asincrono, y sin ella la siguiente
+   * accion se ejecuta antes de que el token este guardado.
+   */
+  async iniciarSesionComo(usuario) {
+    await this.abrir();
+    await this.email.fill(usuario.email);
+    await this.password.fill(usuario.password);
+    await this.enviar.click();
+    await this.page.waitForURL((url) => !url.pathname.startsWith('/login'));
   }
 
-  async enviarFormulario() {
+  /** Para los casos negativos: credenciales malas y el formulario se queda. */
+  async intentarSesionCon(email, password) {
+    await this.abrir();
+    await this.email.fill(email);
+    await this.password.fill(password);
     await this.enviar.click();
   }
 

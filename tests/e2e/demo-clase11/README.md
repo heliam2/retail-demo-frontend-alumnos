@@ -53,9 +53,38 @@ vimos en clase.
 | **1 · Configuración y ambientes** | `../playwright.config.js` | Cambió la URL, el puerto, el navegador |
 | **2 · Datos de prueba** | `datos/fixtures.js` | Cambió el seed, un cupón, un SKU |
 | **3 · Acceso al sistema** | `paginas/*.js` | Cambió un `data-testid` o una ruta |
-| **4 · Acciones de negocio** | `acciones/acciones.js` | Cambió el flujo: un paso nuevo en el checkout |
+| **4 · Acciones de negocio** | *todavía no hace falta* — ver abajo | Cambió un flujo que cruza varias pantallas |
 | **5 · Pruebas** | `*.spec.js` | Cambió **qué** queremos verificar |
 | **6 · Ejecución y reporte** | `../playwright.config.js` | Cambió cuándo o cómo se corre |
+
+### ¿Y la capa 4? No está, y es a propósito
+
+Un page object representa **una pantalla**. Los dos pasos de `03-en-capas.spec.js`
+—iniciar sesión, agregar al carro— viven cada uno en una sola pantalla, así que su
+lugar natural es el page object correspondiente. Envolverlos en una función aparte
+sería un archivo y un concepto de más que no ahorran nada.
+
+La capa 4 aparece cuando un flujo **cruza varias pantallas** y se repite:
+
+```js
+// acciones/compra.js  —  toca TRES pantallas
+export async function comprarHastaElFinal(page, producto) {
+  await new PaginaProducto(page).agregarAlCarro(producto);
+  await new PaginaCarro(page).irACheckout();
+  await new PaginaCheckout(page).completarYPagar(DIRECCION);
+  return new PaginaConfirmacion(page).numeroDePedido();
+}
+```
+
+Eso no cabe en ningún page object sin que uno tenga que saber de los otros.
+
+> **La regla no es de cantidad de capas, es de alcance.**
+> Una pantalla → método del page object. Varias → acción de negocio.
+>
+> No empieces con la capa 4: extráela cuando repitas por tercera vez un flujo
+> que toca varias pantallas.
+
+---
 
 Compruébalo: busca `data-testid` en `03-en-capas.spec.js`. **No hay ninguno.**
 Busca una URL o un código de cupón literal. Tampoco. Cada cosa está en su capa,
